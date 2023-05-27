@@ -2315,3 +2315,25 @@ section {
 #footer .credits a {
   color: #a2cce3;
 }
+/* about css */
+.text-vision-shadow {
+	   font-size: 100%;
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: #180115;
+    -webkit-text-fill-color: #eff3f5;
+    font-family: Times New Roman;
+}
+.text-mission-shadow {
+	font-size: 100%;
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: #180115;
+    -webkit-text-fill-color: #eff3f5;
+    font-family: Times New Roman;
+}
+.text-core-shadow {
+	font-size: 100%;
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: #180115;
+    -webkit-text-fill-color: #eff3f5;
+    font-family: Times New Roman;
+}
