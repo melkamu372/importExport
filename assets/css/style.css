@@ -2337,3 +2337,9 @@ section {
     -webkit-text-fill-color: #eff3f5;
     font-family: Times New Roman;
 }
+.service-card-text{
+  text-align: justify;
+  text-justify: inter-word;
+  /* text-align: center; */
+  margin-bottom: 20px;
+}
