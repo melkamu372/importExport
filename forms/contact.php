@@ -1,41 +1,38 @@
 <?php
-  /**
-  * Requires the "PHP Email Form" library
-  * The "PHP Email Form" library is available only in the pro version of the template
-  * The library should be uploaded to: vendor/php-email-form/php-email-form.php
-  * For more info and help: https://bootstrapmade.com/php-email-form/
-  */
-
-  // Replace contact@example.com with your real receiving email address
-  $receiving_email_address = 'contact@example.com';
-
-  if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
-    include( $php_email_form );
-  } else {
-    die( 'Unable to load the "PHP Email Form" Library!');
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require_once '../vendor/autoload.php';
+$mail = new PHPMailer(true);
+try {
+  //$mail->SMTPDebug = 2;                 //Enable verbose debug output
+  $mail->isSMTP();                         // Send using SMTP
+  $mail->Host       = 'josicon.com';          // Set the SMTP server to send through
+  $mail->SMTPAuth   = true;                   // Enable SMTP authentication
+  $mail->Username   = 'contact@josicon.com';     // SMTP username
+  $mail->Password   = '';           // SMTP password
+  $mail->SMTPSecure = 'tls';         
+  $mail->Port       = 587;             
+    // Recipients
+  $mail->FromName = $_POST['name'];
+  $mail->setFrom($_POST['email'], 'Contact Form');
+  $mail->addAddress('contact@josicon.com', 'Josicon Engineering PLC');     // Add a recipient
+  //$mail->addReplyTo($_POST['email'], 'Information');
+  // $mail->addCC('cc@example.com');
+  // $mail->addBCC('bcc@example.com');
+  $mail->Subject = $_POST['subject'];
+  $mail->Body    = $_POST['message'];
+  //$mail->send();
+  if(!$mail->send())
+  {
+  die( 'Message could not be sent');
   }
-
-  $contact = new PHP_Email_Form;
-  $contact->ajax = true;
+  else
+  {
+  echo "OK";
+     }
+  } catch (Exception $e) {
+      echo "Message could not be sent.try later."  ;
+      //echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+  }
   
-  $contact->to = $receiving_email_address;
-  $contact->from_name = $_POST['name'];
-  $contact->from_email = $_POST['email'];
-  $contact->subject = $_POST['subject'];
-
-  // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
-  /*
-  $contact->smtp = array(
-    'host' => 'example.com',
-    'username' => 'example',
-    'password' => 'pass',
-    'port' => '587'
-  );
-  */
-
-  $contact->add_message( $_POST['name'], 'From');
-  $contact->add_message( $_POST['email'], 'Email');
-  $contact->add_message( $_POST['message'], 'Message', 10);
-
-  echo $contact->send();
 ?>
